@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "CNNVD 自动填报助手",
+  "version": "0.1.0",
+  "description": "CNNVD 两页自动填报与批量上传辅助插件",
+  "permissions": ["storage"],
+  "host_permissions": ["*://*.cnnvd.org.cn/*"],
+  "background": {
+    "service_worker": "src/background/service-worker.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.cnnvd.org.cn/*"],
+      "css": ["src/styles/panel.css"],
+      "js": [
+        "vendor/jszip.min.js",
+        "src/shared/types.js",
+        "src/shared/messages.js",
+        "src/lib/logger.js",
+        "src/lib/queue.js",
+        "src/lib/docx.js",
+        "src/lib/zip.js",
+        "src/lib/selectors.js",
+        "src/content/automation.js",
+        "src/content/panel.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}
